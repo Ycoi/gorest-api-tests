@@ -1,6 +1,6 @@
 name: run-tests
 on: [push]
-jobs:
+jobs: 
   run-api-tests:
     runs-on: ubuntu-latest
     steps:
@@ -8,5 +8,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: |
+          touch .env
+          echo GOREST_BEARER_TOKEN=${{secrets.GOREST_BEARER_TOKEN}} >> .env
       - run: npm i
       - run: npm test
